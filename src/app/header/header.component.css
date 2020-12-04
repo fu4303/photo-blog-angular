@@ -1,0 +1,27 @@
+
+.navbar {
+    display: flex;
+    width: 100%;
+    margin: auto;
+    background-color: #2b2b27;
+    align-content: flex-start;
+}
+
+.navigation {
+    font-family: 'Open Sans', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.nav-item {
+    padding: 25px;
+}
+
+.navigation a {
+    color: #fbfbfb;
+}
+
+.navigation a:hover {
+    color: #899196;
+    text-decoration: none;
+}
