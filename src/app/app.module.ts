@@ -8,6 +8,9 @@ import { PostListComponent } from './posts/post-list/post-list.component';
 import { PostDetailComponent } from './posts/post-detail/post-detail.component';
 import { PostEditComponent } from './posts/post-edit/post-edit.component';
 import { PostItemComponent } from './posts/post-item/post-item.component';
+import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { PostItemComponent } from './posts/post-item/post-item.component';
     PostItemComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

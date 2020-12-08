@@ -1,11 +1,34 @@
-<div class="page-container">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="row pad-left-right">
+            <span class="pull-left title">Posts</span>
+            <a [routerLink]="['new']" class="btn btn-success pull-right">Add Post</a>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="center-panel">
+            <app-post-item 
+              *ngFor="let post of posts"
+              [post] = "post"
+              >
+            </app-post-item>
+          </div>
+        </div>
+      </div>
+
+
+
+
+<!-- <div class="page-container">
     <div class="row ">
+        <span class="pull-left title">Documents</span>
         <a [routerLink]="['new']">New Post</a> 
     </div>
     <div class="post-container">
         <app-post-item
-            *ngFor="let post of posts"
-            [post] = "post">
+            *ngFor = "let post of posts"
+            [post] = "post"
+            >
         </app-post-item>
     </div>
-</div>
+</div> -->
