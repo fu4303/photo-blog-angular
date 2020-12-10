@@ -4,17 +4,19 @@ const sequenceGenerator = require('./sequenceGenerator');
 const Post = require('../models/post');
 
 router.get('/', (req, res, next) => {
-    Post.find();
-    if(err) {
-        return res.status(500).json({
-            title: 'An error occurred',
-            error: error
-        });
-    }
-    return res.status(200).json({
-        message: 'successful',
-        posts: posts
-    })
+  Post.find()
+  .then(posts => {
+      res.status(200).json({
+          message: 'Posts fetched successfully!',
+          posts: posts
+      });
+  })
+  .catch(error => {
+      res.status(500).json({
+          message: 'An error occurred',
+          error: error
+      });
+  });
 });
 
 
@@ -79,7 +81,7 @@ router.post('/', (req, res, next) => {
         Post.deleteOne({ id: req.params.id })
           .then(result => {
             res.status(204).json({
-              message: "Post deleted successfully"
+              message: "Post deleted successfully" 
             });
           })
           .catch(error => {
@@ -96,5 +98,6 @@ router.post('/', (req, res, next) => {
         });
       });
   });
+
 
 module.exports = router; 

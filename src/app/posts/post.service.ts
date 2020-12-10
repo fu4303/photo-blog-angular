@@ -2,6 +2,7 @@ import { Post } from './post.model';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
@@ -12,63 +13,37 @@ export class PostService {
     postListChangedEvent = new Subject<Post[]>();
     posts: Post[] = [];
     maxPostId: number;
+    postsUpdated = new Subject<Post[]>();
 
-    constructor(private http: HttpClient) {
-        this.maxPostId = this.getMaxId();
+    constructor(private http: HttpClient,
+                private router: Router) {
+        
     }
 
-    getMaxId(): number {
-
-        let maxId = 0;
-
-        for (let post of this.posts) {
-            const currentId = Number(post.id);
-            if (currentId > maxId) {
-                maxId = currentId
-            }
-        }
-        return maxId;
+    getPosts(){
+        this.http
+          .get<{ message : string, posts : Post[]}>('http://localhost:3000/posts')
+          .subscribe(
+            (postData) => {
+               this.posts = postData.posts;
+               this.postListChangedEvent.next(this.posts.slice());
+            },
+            (error: any) => {
+               console.log(error)
+            });
     }
 
     getPost(id: string): Post {
         return this.posts.find((post) => post.id === id);
     }
 
-    getPosts() {
-        this.http
-        .get('http://localhost:3000/posts')
-        .subscribe(
-            (posts: Post[]) => {
-                this.posts = posts;
-                this.maxPostId = this.getMaxId();
-                this.postListChangedEvent.next(this.posts.slice());
-            },
-            (error: any) => {
-                console.log(error);
-            }
-        );
-    }
-
-    deletePost(post: Post) {
-
-        if (!post) {
-          return;
-        }
-    
-        const pos = this.posts.findIndex(d => d.id === post.id);
-    
-        if (pos < 0) {
-          return;
-        }
-    
-        // delete from database
-        this.http.delete('http://localhost:3000/posts/' + post.id)
-          .subscribe(
-            (response: Response) => {
-              this.posts.splice(pos, 1);
-              this.storePosts();
-            }
-          );
+    deletePost(postId: string) {
+        this.http.delete('http://localhost:3000/posts/' + postId)
+        .subscribe(() => {
+          this.posts.splice(+postId, 1);
+          this.storePosts();
+          location.reload();
+        });
       }
 
     addPost(post: Post) {
@@ -78,17 +53,17 @@ export class PostService {
     
         // make sure the id of the new Post is empty
         post.id = '';
-    
+
         const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    
+
         // add to database
         this.http.post<{ message: string, post: Post }>('http://localhost:3000/posts',
           post,
           { headers: headers })
-          .subscribe(
-            (responseData) => {
+          .subscribe((postData) => {
               // add new post to posts
-              this.posts.push(responseData.post);
+              this.posts.push(postData.post);
+              this.postListChangedEvent.next(this.posts.slice());
               this.storePosts();
             }
           );
@@ -99,7 +74,7 @@ export class PostService {
           return;
         }
     
-        const pos = this.posts.findIndex(d => d.id === originalPost.id);
+        const pos = this.posts.findIndex(p => p.id === originalPost.id);
     
         if (pos < 0) {
           return;
@@ -109,12 +84,12 @@ export class PostService {
         newPost.id = originalPost.id;
     
         const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    
+        console.log("original id: " + originalPost.id);
         // update database
-        this.http.put('http://localhost:3000/posts/' + originalPost.id,
+        this.http.put<{ message: string, post: Post }>('http://localhost:3000/posts/' + originalPost.id,
         newPost, { headers: headers })
           .subscribe(
-            (response: Response) => {
+            (postData) => {
               this.posts[pos] = newPost;
               this.storePosts();
             }
@@ -124,15 +99,15 @@ export class PostService {
     storePosts() {
         let posts = JSON.stringify(this.posts);
         const headers = new HttpHeaders({'Content-Type': 'application/json'});
-        this.http
-        .put('https://cmsproject-640ac.firebaseio.com/documents.json',
+
+        this.http.put<{ message: string, post: Post }>('http://localhost:3000/posts',
             posts,
             { headers: headers })
         .subscribe(
             () => {
-                this.postListChangedEvent.next(this.posts.slice());
+              this.postListChangedEvent.next(this.posts.slice());
+              this.router.navigate(["/"]);
             }
         );
     }
-
 }
