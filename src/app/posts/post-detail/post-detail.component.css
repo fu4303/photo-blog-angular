@@ -1,0 +1,40 @@
+
+.post-container {
+    max-width: 100%;
+}
+
+.title {
+    font-family: 'Playfair Display', serif;
+}
+
+img {
+    max-height: 250px;
+    width: 100%;
+}
+
+.content {
+    font-family: 'Lato', sans-serif;
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-info {
+    font-family: 'Playfair Display', serif;
+    background-color: #899196;
+    color: #FBFBFB;
+    font-size: 13px;
+    border-radius: 3%;
+    margin-right: 10px;
+}
+
+.btn-danger {
+    background-color: #AD5D4E;
+    font-family: 'Playfair Display', serif;
+    color: #FBFBFB;
+    font-size: 13px;
+    border-radius: 3%;
+}

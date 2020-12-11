@@ -1,0 +1,21 @@
+.imageContainer {
+    height: 350px;
+}
+
+img {
+    display: block;
+    margin: auto;
+    max-height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+.infoContainer {
+    padding-top: 45px;;
+}
+
+.aboutImage {
+    padding-bottom: 50px;
+}
+
+
+

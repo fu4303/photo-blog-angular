@@ -11,6 +11,7 @@ import { PostItemComponent } from './posts/post-item/post-item.component';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AboutPageComponent } from './about/about-page/about-page.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     PostListComponent,
     PostDetailComponent,
     PostEditComponent,
-    PostItemComponent
+    PostItemComponent,
+    AboutPageComponent
   ],
   imports: [
     BrowserModule,

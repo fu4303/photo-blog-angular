@@ -1,0 +1,23 @@
+.post-container {
+    justify-content: space-around;
+    display: grid;
+    grid-template-columns: auto;
+    height: 300px;
+    width: 100%;
+    padding: 30px;
+    
+}
+
+.page-container {
+    max-width: 100%;
+}
+
+a {
+    font-family: 'Playfair Display', serif;
+    background-color: #899196;
+    color: #FBFBFB;
+    padding: 10.5px;
+    font-size: 17px;
+    border-radius: 3%;
+    margin-left:-60px;
+}

@@ -17,7 +17,6 @@ export class PostService {
 
     constructor(private http: HttpClient,
                 private router: Router) {
-        
     }
 
     getPosts(){
@@ -41,7 +40,8 @@ export class PostService {
         this.http.delete('http://localhost:3000/posts/' + postId)
         .subscribe(() => {
           this.posts.splice(+postId, 1);
-          this.storePosts();
+          this.postListChangedEvent.next(this.posts.slice());
+          this.router.navigate(['/']);
           location.reload();
         });
       }
@@ -64,7 +64,7 @@ export class PostService {
               // add new post to posts
               this.posts.push(postData.post);
               this.postListChangedEvent.next(this.posts.slice());
-              this.storePosts();
+              this.router.navigate(['/']);
             }
           );
       }
@@ -91,23 +91,10 @@ export class PostService {
           .subscribe(
             (postData) => {
               this.posts[pos] = newPost;
-              this.storePosts();
+              this.postListChangedEvent.next(this.posts.slice());
+              this.router.navigate(['/']);
             }
           );
       }
 
-    storePosts() {
-        let posts = JSON.stringify(this.posts);
-        const headers = new HttpHeaders({'Content-Type': 'application/json'});
-
-        this.http.put<{ message: string, post: Post }>('http://localhost:3000/posts',
-            posts,
-            { headers: headers })
-        .subscribe(
-            () => {
-              this.postListChangedEvent.next(this.posts.slice());
-              this.router.navigate(["/"]);
-            }
-        );
-    }
 }

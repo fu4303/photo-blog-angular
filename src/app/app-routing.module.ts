@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PostsComponent } from './posts/posts.component';
 import { PostEditComponent } from './posts/post-edit/post-edit.component';
 import { PostDetailComponent } from './posts/post-detail/post-detail.component';
+import { AboutPageComponent } from './about/about-page/about-page.component';
 
 
 
@@ -16,7 +17,9 @@ const appRoutes: Routes = [
             { path: ':id', component: PostDetailComponent },
             { path: ':id/edit', component: PostEditComponent },
         ] 
-    }
+    },
+
+    { path: 'about', component: AboutPageComponent },
 ]
 
 @NgModule({

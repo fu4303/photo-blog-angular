@@ -1,7 +1,13 @@
-<a 
-  [routerLink]="[post.id]"
-  routerLinkActive="active" 
-  class="list-group-item clearfix postDiv"
-  style="cursor: pointer" >
-    {{ post.title }} 
-</a> 
+<div class="post">
+  <a [routerLink]="[post.id]" 
+      routerLinkActive="active" 
+      class="clearfix postDiv" 
+      style="cursor: pointer">
+    <span class="title">{{ post.title }}</span>
+    <br><hr>
+    <span class="date">{{ post.date }}</span>
+    <br>
+  </a>
+  <img src="{{ post.imageUrl }}" alt="landscape photography"
+        class="postImage">
+</div>

@@ -42,7 +42,7 @@ export class PostEditComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     const value = form.value;
-    const newPost = new Post(value.id, value.title, value.date, value.imageUrl, value.content);
+    const newPost = new Post('', value.title, value.date, value.imageUrl, value.content);
     if (this.editMode) {
       this.postService.updatePost(this.originalPost, newPost)
     } else {

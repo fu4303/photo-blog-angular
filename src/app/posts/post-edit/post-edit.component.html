@@ -1,6 +1,5 @@
 <div class="panel panel-default">
     <div class="panel-body">
-
         <form id="post-edit" (ngSubmit)="onSubmit(f)" #f="ngForm">
             <!-- TITLE -->
             <div class="row">
@@ -12,13 +11,13 @@
                         class="form-control" 
                         size="120" 
                         max="120" 
-                        name='name' 
+                        name="title"
                         [ngModel]="post?.title"
                         required 
                         #title="ngModel">
                 </div>
                 <div class="alert alert-danger" *ngIf="!title.valid && title.touched">
-                    The Blog Title is a required field.
+                    The Post Title is a required field.
                 </div>
             </div>
 
@@ -28,13 +27,12 @@
                     <label for="date">Post Date:</label>
                     <input 
                         type="text" 
-                        id="title" 
+                        id="date" 
                         class="form-control" 
                         size="120" 
                         max="120" 
-                        name='date' 
+                        name="date"
                         [ngModel]="post?.date"
-                        required 
                         #date="ngModel">
                 </div>
             </div>
@@ -51,7 +49,6 @@
                         max="255" 
                         name="imageUrl" 
                         [ngModel]="post?.imageUrl"
-                        required 
                         #imageUrl="ngModel">
                     <br>
 
@@ -74,6 +71,9 @@
                             #content="ngModel"></textarea>
                         <br>
     
+                    </div>
+                    <div class="alert alert-danger" *ngIf="!content.valid && content.touched">
+                            The Content is a required field.
                     </div>
             </div>
 

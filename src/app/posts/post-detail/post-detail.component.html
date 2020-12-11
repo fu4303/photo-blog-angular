@@ -2,24 +2,23 @@
     <div class="">
         <div class="row pad-all">
             <h4 class="title margin-left-right">{{ post.title }}</h4>
-            <div class="row">
-                <label>Date: </label>
-                <span class="label-value"> {{ post.date }}</span>
-            </div>
-            <div class="row pull-right margin-left-right">
+            <span class="label-value"> {{ post.date }}</span>
+
+            <div class="row margin-left-right buttons">
                 <a [routerLink]="['edit']" class="btn btn-info">Edit</a>
                 <a (click)="onDelete(post.id)" class="btn btn-danger">Delete</a>
             </div>
-        </div>
+        </div> 
     </div>
     <div class="">
         <div class="pad-left-right">
             <br>
             <div class="row">
-                <span class="label-value"> {{ post.imageUrl }}</span>
+                <img src="{{ post.imageUrl }}" alt="">
             </div>
+            <hr>
             <div class="row">
-                <span class="label-value"> {{ post.content }}</span>
+                <span class="content label-value"> {{ post.content }}</span>
             </div>
         </div>
     </div>

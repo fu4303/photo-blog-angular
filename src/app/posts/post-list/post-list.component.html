@@ -1,12 +1,13 @@
 <div class="page-container">
-    <div class="row ">
-        <a [routerLink]="['new']">New Post</a> 
+    <div class="">
+        <a [routerLink]="['new']">New Post</a>
     </div>
-    <div class="post-container">
-        <app-post-item
-            *ngFor = "let post of posts"
-            [post] = "post"
-            >
-        </app-post-item>
+    <div class="row col-md-12">
+        <div class="post-container">
+            <app-post-item 
+                *ngFor="let post of posts" 
+                [post]="post">
+            </app-post-item>
+        </div>
     </div>
-</div> 
+</div>
